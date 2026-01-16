@@ -5,8 +5,22 @@ import com.kata.springmvc.model.User;
 import java.util.List;
 
 public interface UserDAO {
-    public List<User> findAll();
-    public User findById(Long id);
-    public void save(User user);
-    public void delete(Long id);
+    List<User> findAll();
+
+    User findById(Long id);
+
+    /**
+     * Persist a new user.
+     */
+    void create(User user);
+
+    /**
+     * Update an existing user.
+     */
+    void update(User user);
+
+    /**
+     * Delete a user by id (implementation is responsible for loading the entity and removing it).
+     */
+    void deleteById(Long id);
 }

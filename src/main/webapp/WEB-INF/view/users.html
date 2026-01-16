@@ -7,6 +7,9 @@
 </head>
 <body>
 <h1>Users List</h1>
+
+<div th:if="${error}" th:text="${error}" style="margin: 10px 0; padding: 10px; border: 1px solid #cc0000;"></div>
+
 <a th:href="@{/users/new}">Add new user</a>
 <table border="1">
     <thead>

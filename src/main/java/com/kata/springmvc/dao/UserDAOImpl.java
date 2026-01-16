@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserDAOImpl implements UserDAO {
+public class gUserDAOImpl implements UserDAO {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -24,16 +24,17 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void save(User user) {
-        if (user.getId() == null) {
-            entityManager.persist(user);
-        } else {
-            entityManager.merge(user);
-        }
+    public void create(User user) {
+        entityManager.persist(user);
     }
 
     @Override
-    public void delete(Long id) {
+    public void update(User user) {
+        entityManager.merge(user);
+    }
+
+    @Override
+    public void deleteById(Long id) {
         User user = entityManager.find(User.class, id);
         if (user != null) entityManager.remove(user);
     }

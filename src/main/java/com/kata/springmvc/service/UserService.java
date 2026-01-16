@@ -5,8 +5,13 @@ import com.kata.springmvc.model.User;
 import java.util.List;
 
 public interface UserService {
-    public List<User> findAll();
-    public User findById(Long id);
-    public void save(User user);
-    public void delete(Long id);
+    List<User> findAll();
+
+    User findById(Long id);
+
+    void create(String name, String email, Integer age);
+
+    void update(Long id, String name, String email, Integer age);
+
+    void deleteById(Long id);
 }
