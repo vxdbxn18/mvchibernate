@@ -20,7 +20,9 @@ public interface UserDAO {
     void update(User user);
 
     /**
-     * Delete a user by id (implementation is responsible for loading the entity and removing it).
+     * Delete a user entity.
+     *
+     * DAO should perform only DB operations; existence checks belong to the service layer.
      */
-    void deleteById(Long id);
+    void delete(User user);
 }

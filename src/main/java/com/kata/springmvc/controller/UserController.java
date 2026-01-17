@@ -5,6 +5,7 @@ import com.kata.springmvc.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,23 +30,14 @@ public class UserController {
         return "users";
     }
     @PostMapping("/create")
-    public String create(
-            @RequestParam String name,
-            @RequestParam String email,
-            @RequestParam Integer age
-    ) {
-        userService.create(name, email, age);
+    public String create(@ModelAttribute("user") User user) {
+        userService.create(user);
         return "redirect:/users";
     }
 
     @PostMapping("/update")
-    public String update(
-            @RequestParam Long id,
-            @RequestParam String name,
-            @RequestParam String email,
-            @RequestParam Integer age
-    ) {
-        userService.update(id, name, email, age);
+    public String update(@ModelAttribute("user") User user) {
+        userService.update(user);
         return "redirect:/users";
     }
     @GetMapping("/edit")

@@ -32,32 +32,36 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public void create(String name, String email, Integer age) {
+    public void create(User userData) {
         User user = new User();
-        applyFields(user, name, email, age);
+        applyFields(user, userData);
         userDAO.create(user);
     }
 
     @Override
     @Transactional
-    public void update(Long id, String name, String email, Integer age) {
+    public void update(User userData) {
+        Long id = userData.getId();
         User user = userDAO.findById(id);
         if (user == null) {
             throw new UserNotFoundException("User with id %d not found".formatted(id));
         }
-        applyFields(user, name, email, age);
+        applyFields(user, userData);
         userDAO.update(user);
     }
 
     @Override
     @Transactional
     public void deleteById(Long id) {
-        userDAO.deleteById(id);
+        User user = userDAO.findById(id);
+        if (user != null) {
+            userDAO.delete(user);
+        }
     }
 
-    private void applyFields(User user, String name, String email, Integer age) {
-        user.setName(name);
-        user.setEmail(email);
-        user.setAge(age);
+    private void applyFields(User target, User source) {
+        target.setName(source.getName());
+        target.setEmail(source.getEmail());
+        target.setAge(source.getAge());
     }
 }
